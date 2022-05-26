@@ -1,5 +1,6 @@
 package io.company.library;
 
+import com.github.javafaker.DateAndTime;
 import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,21 +20,29 @@ import java.util.concurrent.ThreadLocalRandom;
 
         @Autowired
         BookService bookService;
+        @Autowired
+        AuthorService authorService;
 
         @Override
         public void run(String... args) throws Exception {
             //Scanner reader = new Scanner(System.in);
-            //createBooks();
+            //createFakers();
             //createOneBook(reader);
         }
 
-        public void createBooks(){
-            logger.info("Welcome to the createBooks");
+        public void createFakers(){
+            logger.info("Welcome to the createFakers");
 
             Faker faker = new Faker();
             for (int i = 0; i < 500; i++) {
+                String[] name = faker.book().author().split(" ");
+                String firstName = name[0];
+                String lastName = name[1];
+                LocalDate dateOfBirth = LocalDate.now();
+                Author author = new Author(firstName, lastName, dateOfBirth);
+                authorService.createAuthor(author);
+
                 String title = faker.book().title();
-                String author = faker.book().author();
                 int pages = ThreadLocalRandom.current().nextInt(60, 2500);
                 int publishedYear = ThreadLocalRandom.current().nextInt(-500, 2022);
                 String isbn = RandomStringUtils.randomAlphabetic(20);
@@ -40,7 +50,7 @@ import java.util.concurrent.ThreadLocalRandom;
                 bookService.createBook(book);
             }
 
-            logger.info("finishing createBooks ...");
+            logger.info("finishing createFakers ...");
 
         }
 
@@ -59,7 +69,7 @@ import java.util.concurrent.ThreadLocalRandom;
             System.out.println("ISBN? ");
             String isbn = reader.next();
 
-            bookService.createBook(new Book(title, author, pages, publishedYear, isbn));
+            bookService.createBook(new Book(title, pages, publishedYear, isbn));
 
             logger.info("bookService called with new book ...");
             logger.info("finishing createBook ...");

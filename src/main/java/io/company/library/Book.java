@@ -1,6 +1,7 @@
 package io.company.library;
 
 //https://projectlombok.org/features/all
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 
@@ -16,14 +17,27 @@ public class Book {
     private long bookId;
     @Column(name = "BOOK_TITLE")
     private String title;
-    private String author;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="AUTHOR_FK")
+    private Author author;
+
+    @Column(name = "NUMBER_PAGES")
     private int pages;
     @Column(name = "PUBLISHED_YEAR")
     private int publishedYear;
     @Column(name = "ISBN")
     private String isbn;
 
-    public Book(String title, String author, int pages, int publishedYear, String isbn) {
+    public Book(String title, int pages, int publishedYear, String isbn) {
+        this.title = title;
+        this.pages = pages;
+        this.publishedYear = publishedYear;
+        this.isbn = isbn;
+    }
+
+    public Book(String title, Author author, int pages, int publishedYear, String isbn) {
         this.title = title;
         this.author = author;
         this.pages = pages;

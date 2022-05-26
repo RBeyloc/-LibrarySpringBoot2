@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api")
-public class LibraryRestController {
+@RequestMapping("apiLibrary/books")
+public class BookRestController {
 
     @Autowired
     BookService bookservice;
@@ -153,7 +153,7 @@ public class LibraryRestController {
     }
 
     //CRUD: delete by title
-    @DeleteMapping(path = "deleteBookByTitle")
+    /*@DeleteMapping(path = "deleteBookByTitle")
     public ResponseEntity<Book> deleteBookByTitle(@RequestParam String title) {
         Optional<Iterable<Book>> booksFound = bookservice.findBooksByTitle(title);
 
@@ -168,6 +168,6 @@ public class LibraryRestController {
             headers.add("operationStatus", "not Found");
             return ResponseEntity.accepted().headers(headers).body(null);
         }
-    }
+    }*/
 
 }
