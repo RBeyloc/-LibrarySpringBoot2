@@ -50,6 +50,8 @@ public class BookService {
         return bookRepository.deleteBookByTitle(title);
     }
 
-
+    public int count() {
+        return (int) bookRepository.count();
+    }
 
 }

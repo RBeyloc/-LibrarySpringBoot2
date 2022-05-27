@@ -45,4 +45,9 @@ public class AuthorService {
     public Optional<Iterable<Author>> findAuthorsByLastName(String lastName) {
         return authorRepository.findAuthorsByLastName(lastName);
     }
+
+    public int count() {
+        return (int) authorRepository.count();
+    }
+
 }

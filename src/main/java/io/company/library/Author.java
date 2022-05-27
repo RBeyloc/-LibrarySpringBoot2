@@ -36,7 +36,7 @@ public class Author {
     }
     public void addBook(Book book) {
         this.books.add(book);
-        if (book.getAuthor() != null) book.getAuthor().getBooks().remove(book);
+        /*if(book.getAuthor() != null) book.getAuthor().getBooks().remove(book);*/
         book.setAuthor(this);
     }
     //method to add books to books
