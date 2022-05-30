@@ -1,5 +1,7 @@
-package io.company.library;
+package io.company.library.controller;
 
+import io.company.library.model.Book;
+import io.company.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,10 @@
-package io.company.library;
+package io.company.library.configuration;
 
-import com.github.javafaker.DateAndTime;
 import com.github.javafaker.Faker;
+import io.company.library.model.Author;
+import io.company.library.service.AuthorService;
+import io.company.library.model.Book;
+import io.company.library.service.BookService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

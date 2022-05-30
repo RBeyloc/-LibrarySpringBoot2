@@ -1,7 +1,6 @@
-package io.company.library;
+package io.company.library.model;
 
 //https://projectlombok.org/features/all
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
